@@ -1,136 +1,85 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sound Detectives — Phonics Adventure</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sound Detectives: Phonics Arcade</title>
 <style>
-:root{--ink:#20244d;--purple:#7357e8;--pink:#ff6b9a;--yellow:#ffd84d;--mint:#5be0b3;--blue:#57b8ff;--orange:#ff9f43}
-*{box-sizing:border-box} body{margin:0;min-height:100vh;font-family:"Trebuchet MS",Arial,sans-serif;color:var(--ink);background:linear-gradient(135deg,#b8f4ff,#f9c8e7 50%,#fff0a8);display:flex;align-items:center;justify-content:center;padding:14px}
-button{font:inherit;cursor:pointer;border:0;border-radius:18px;font-weight:900;transition:transform .14s,filter .14s;touch-action:manipulation}
-button:hover{transform:translateY(-3px);filter:brightness(1.03)}button:focus-visible{outline:4px solid #20244d;outline-offset:3px}
-.shell{width:min(900px,100%);background:#fffdf9;border:5px solid white;border-radius:30px;box-shadow:0 16px 0 #6b52bf2b,0 25px 60px #3e2a7830;overflow:hidden}
-header{padding:16px 22px;background:linear-gradient(100deg,#7454e8,#a04fe2);color:white;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.logo{font-size:clamp(1.35rem,4vw,2rem);font-weight:1000;letter-spacing:.3px}.tag{background:#ffffff30;border:2px solid #ffffff60;border-radius:999px;padding:7px 12px;font-weight:800;font-size:.85rem}
-main{padding:clamp(16px,4vw,30px)}.screen{animation:pop .25s ease}@keyframes pop{from{opacity:.3;transform:scale(.98)}to{opacity:1;transform:scale(1)}}
-h1,h2,p{margin-top:0}h1{font-size:clamp(1.7rem,5vw,2.7rem);line-height:1.1}h2{font-size:clamp(1.3rem,4vw,2rem)}
-.hero{text-align:center;padding:8px 0 15px}.mascot{font-size:clamp(4rem,12vw,7rem);filter:drop-shadow(0 5px 0 #ffd84d);margin:4px}
-.hero p{font-size:1.1rem;line-height:1.5;max-width:620px;margin:0 auto 18px}.rainbow{color:#7454e8}.primary{background:var(--yellow);color:#30245b;padding:15px 24px;box-shadow:0 6px 0 #e4a72a;font-size:1.08rem}.secondary{background:#e9e5ff;color:#4933a4;padding:11px 15px}.tiny{font-size:.92rem;padding:9px 12px}.topstats{display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between;align-items:center;margin-bottom:14px}.stat{background:#f0ecff;border:2px solid #e0d8ff;border-radius:999px;padding:8px 13px;font-weight:900}.progress{height:14px;background:#eeeaf7;border-radius:999px;overflow:hidden;margin:10px 0 20px}.progressbar{height:100%;width:0;background:linear-gradient(90deg,#5be0b3,#57b8ff,#a678ff);transition:width .25s}
-.levelgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:20px 0}.level{padding:17px 13px;border-radius:22px;text-align:left;min-height:120px;color:#2c2459;border:3px solid #fff;box-shadow:0 5px 0 #24244b12}.level .emoji{font-size:2.2rem;display:block;margin-bottom:6px}.level strong{font-size:1.05rem;display:block}.level small{display:block;margin-top:5px;font-weight:700;line-height:1.35}.lv1{background:#fff0a8}.lv2{background:#c8f8e6}.lv3{background:#d6eaff}.lv4{background:#ffd5e4}.lv5{background:#e6d9ff}.lv6{background:#ffe0bd}
-.playarea{display:grid;grid-template-columns:1fr;gap:14px}.questioncard{border-radius:26px;background:linear-gradient(135deg,#fff2b7,#ffe3f1);padding:18px;text-align:center;border:3px solid white;box-shadow:inset 0 0 0 2px #f3e8ff}.questionemoji{font-size:clamp(3.4rem,10vw,5rem);line-height:1.1}.word{font-size:clamp(2.5rem,9vw,4.5rem);font-weight:1000;color:#5033b8;letter-spacing:1px;margin:8px 0}.instruction{font-size:1.05rem;font-weight:800;line-height:1.4}.hear{background:#57b8ff;color:#12355e;padding:10px 15px;box-shadow:0 4px 0 #2785c9}.answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.answer{min-height:100px;font-size:clamp(1.2rem,4vw,1.7rem);color:#27214e;padding:12px;border:3px solid white;box-shadow:0 5px 0 #32285c19}.answer .symbol{font-size:2.1rem;display:block;margin-bottom:4px}.answer.a{background:#c9f8e7}.answer.b{background:#d9e8ff}.answer:disabled{opacity:.75;cursor:default;transform:none}
-.feedback{min-height:58px;border-radius:17px;padding:13px 15px;background:#f0edff;font-weight:900;line-height:1.4;display:flex;gap:10px;align-items:center}.feedback.good{background:#d8f9e8;color:#126542}.feedback.bad{background:#ffe0e3;color:#9d2536}.feedback .face{font-size:1.8rem}.bottomrow{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-top:13px}
-.end{text-align:center}.bigscore{font-size:clamp(3rem,10vw,5rem);font-weight:1000;color:#7454e8}.badge{display:inline-block;background:#fff0a8;border-radius:999px;padding:8px 13px;font-weight:900;margin:5px}.small{font-size:.9rem;color:#5d5c77;line-height:1.5}.hidden{display:none!important}.confetti{font-size:2rem;letter-spacing:8px;margin:8px}
-@media(max-width:520px){.levelgrid{grid-template-columns:1fr}.level{min-height:unset}.answers{gap:8px}.answer{min-height:90px;padding:8px}.topstats{align-items:flex-start}.shell{border-radius:22px}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style>
-</head>
-<body>
-<div class="shell">
-<header><div class="logo">🕵️‍♀️ Sound Detectives</div><div class="tag">🌈 PHONICS ADVENTURE</div></header>
+:root{--navy:#172044;--purple:#6238d8;--yellow:#ffdf55;--mint:#9af0c8;--pink:#ffb4d0;--blue:#a9eaff}
+*{box-sizing:border-box}body{margin:0;padding:14px;font-family:system-ui,Arial,sans-serif;color:var(--navy);background:linear-gradient(135deg,#8be6ff,#d7c6ff 55%,#ffd2e4);min-height:100vh;display:grid;place-items:center}
+button{font:inherit;font-weight:800;border:0;border-radius:14px;padding:12px 16px;cursor:pointer;transition:transform .12s}button:hover{transform:translateY(-2px)}button:focus-visible{outline:3px solid var(--navy);outline-offset:3px}button:disabled{opacity:.55;cursor:default;transform:none}
+.app{width:min(980px,100%);background:#fffdf8;border:5px solid white;border-radius:26px;overflow:hidden;box-shadow:0 15px 45px #29204b40}
+header{background:linear-gradient(100deg,#4b29c9,#9e3fc8);color:white;padding:16px 22px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}.logo{font-size:clamp(1.2rem,4vw,1.8rem);font-weight:1000}.tag{background:#ffffff25;border:1px solid #ffffff55;padding:7px 11px;border-radius:99px;font-size:.8rem;font-weight:800}
+main{padding:clamp(15px,4vw,28px)}.center{text-align:center}.hide{display:none!important}h1{font-size:clamp(2rem,5vw,3rem);line-height:1.05;margin:.2em 0}h2{margin:.3em 0}.muted{color:#5d6280;line-height:1.5}.hero{padding:24px 0}.hero-art{font-size:4.5rem}.primary{background:var(--yellow);color:#30205b;box-shadow:0 4px 0 #d3a92b}.secondary{background:#e9e3ff;color:#4c35a6}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px}.world{min-height:165px;text-align:left;border:3px solid white;box-shadow:0 4px 0 #24204425;display:flex;flex-direction:column;gap:5px;color:#172044}.world .icon{font-size:2.4rem}.world small{line-height:1.35}.forest{background:#a9f0bb}.aliens{background:#ffe59b}.lab{background:#a9eaff}.builder{background:#ffc5df}.memory{background:#d6c8ff}.boss{background:#ffc28e}
+.stats{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:10px}.stat{background:#efebff;border-radius:10px;padding:8px 11px;font-weight:850}.bar{height:10px;border-radius:99px;background:#e8e3f5;overflow:hidden;margin:12px 0 18px}.bar div{height:100%;width:0;background:linear-gradient(90deg,#46c88c,#ffce42)}
+.stage{min-height:370px;border:3px solid white;border-radius:20px;background:linear-gradient(#e1f8ff,#f2eaff);padding:clamp(14px,3vw,22px);position:relative;overflow:hidden}.stage:after{content:"";position:absolute;bottom:0;left:0;right:0;height:15px;background:repeating-linear-gradient(90deg,#6bcf9b 0 30px,#4bb880 30px 60px);opacity:.45}.stage>*{position:relative;z-index:1}.art{font-size:2.7rem}.prompt{font-size:1.15rem;font-weight:900;line-height:1.4;margin:8px auto}.target{font-size:1.65rem;font-weight:1000;margin:7px}.helper{color:#5c6080;font-size:.9rem;min-height:24px}.feedback{background:#efebff;border-radius:12px;padding:11px;margin:12px 0;min-height:44px;font-weight:800}.good{background:#d7f8e7;color:#155b3b}.bad{background:#ffe0e8;color:#8c2340}.options,.tiles,.cards,.baskets{display:flex;justify-content:center;align-items:stretch;gap:10px;flex-wrap:wrap;margin:18px auto}.option{background:#fff;border:3px solid #c9bcff;box-shadow:0 4px 0 #b8abd7;min-width:112px;min-height:105px;color:var(--navy)}.emoji{display:block;font-size:2.2rem}.word{display:block;font-size:1rem;margin-top:4px}.selected{background:#ffed9b!important;border-color:#e2ac22!important}.correct{background:#d7f8e7!important;border-color:#32a873!important}.wrong{background:#ffe0e8!important;border-color:#e86b89!important}.platform{border-radius:22px 22px 8px 8px}.basket{background:white;border:3px dashed #8c7bd3;min-width:145px;min-height:88px}.basket .emoji{font-size:1.8rem}.letter{font-size:1.5rem;min-width:52px;background:#fff;border:3px solid #c9bcff;box-shadow:0 4px 0 #b8abd7}.letter.used{opacity:.3}.output{font-size:1.5rem;letter-spacing:5px;font-weight:1000;background:#fff8d7;border:2px solid #ffdc5c;padding:10px;border-radius:12px;display:inline-block}.card{width:100px;height:100px;background:#7044dd;color:white;font-size:1.4rem;border:3px solid white;box-shadow:0 4px 0 #b8abd7;padding:6px}.card.open{background:white;color:var(--navy);border-color:#a999ed}.card.paired{background:#d7f8e7;color:var(--navy);border-color:#32a873}.actions{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:12px}.badge{display:inline-block;background:#ffed9b;border-radius:99px;padding:8px 12px;margin:4px;font-weight:900}.foot{text-align:center;color:#77758e;font-size:.8rem;margin-top:12px}
+@media(max-width:500px){body{padding:6px}.app{border-radius:18px}.world{min-height:130px}.option{min-width:90px}.card{width:80px;height:80px}}
+</style></head>
+<body><div class="app">
+<header><div class="logo">🕵️ Sound Detectives</div><div class="tag">🕹️ PHONICS ARCADE</div></header>
 <main>
-<section id="home" class="screen">
- <div class="hero"><div class="mascot" aria-hidden="true">🦊🔍</div><h1>Welcome, <span class="rainbow">Sound Detective!</span></h1>
- <p>Explore the magic of English sounds! Listen to words, choose the sound, earn stars and unlock new missions.</p>
- <button id="goLevels" class="primary">🚀 Choose a mission!</button>
- <p class="small" style="margin-top:15px">🔊 Turn up your sound for spoken words and cheerful sound effects. (Audio depends on your browser.)</p></div>
-</section>
-<section id="levels" class="screen hidden">
- <div class="topstats"><span class="stat">⭐ Stars: <b id="totalStars">0</b></span><button class="secondary tiny" id="backHome">🏠 Home</button></div>
- <h2>🗺️ Choose your sound mission</h2><p>Start with any mission. Each one has 5 questions!</p>
- <div class="levelgrid">
-  <button class="level lv1" data-level="c"><span class="emoji">🐱</span><strong>Mission 1: C sounds</strong><small>/k/ as in cat · /s/ as in city</small></button>
-  <button class="level lv2" data-level="g"><span class="emoji">🦒</span><strong>Mission 2: G sounds</strong><small>/g/ as in goat · /dʒ/ as in giant</small></button>
-  <button class="level lv3" data-level="s"><span class="emoji">🐍</span><strong>Mission 3: S sounds</strong><small>/s/ as in sun · /z/ as in zoo</small></button>
-  <button class="level lv4" data-level="a"><span class="emoji">🍎</span><strong>Mission 4: Short A</strong><small>/æ/ as in apple, cat and map</small></button>
-  <button class="level lv5" data-level="v"><span class="emoji">🎻</span><strong>Mission 5: V or W?</strong><small>Hear the difference: van / wagon</small></button>
-  <button class="level lv6" data-level="mix"><span class="emoji">🏆</span><strong>Mission 6: Super Mix</strong><small>A little bit of everything!</small></button>
- </div>
- <p class="small">Teacher note: these are introductory listening and sound-recognition activities. English spelling patterns have exceptions.</p>
-</section>
-<section id="game" class="screen hidden" aria-live="polite">
- <div class="topstats"><span class="stat" id="levelLabel">Mission 1</span><span class="stat" id="qCount">Question 1/5</span><span class="stat">⭐ <b id="sessionStars">0</b></span></div>
- <div class="progress"><div id="progressbar" class="progressbar"></div></div>
- <div class="playarea">
-  <div class="questioncard"><div class="questionemoji" id="emoji">🐱</div><div class="word" id="word">cat</div>
-  <div class="instruction" id="prompt">What sound does C make?</div>
-  <div style="margin-top:12px"><button id="hearWord" class="hear">🔊 Hear the word</button></div></div>
-  <div class="answers" id="answers"></div>
-  <div id="feedback" class="feedback"><span class="face">💡</span><span>Listen, look and choose an answer!</span></div>
- </div>
- <div class="bottomrow"><button id="quit" class="secondary">🗺️ Missions</button><button id="next" class="primary hidden">Next ➜</button></div>
-</section>
-<section id="finish" class="screen hidden end">
- <div class="confetti">🎉 ⭐ 🎈 ⭐ 🎉</div><div class="mascot">🦊🏆</div><h1 id="finishTitle">Mission complete!</h1>
- <div class="bigscore" id="finishStars">5 / 5 ⭐</div><p id="finishText">Amazing work!</p>
- <div id="earned"></div><p class="small">Try another mission to become a phonics superstar.</p>
- <button class="primary" id="moreMissions">🗺️ Choose another mission</button>
- <button class="secondary" id="replay" style="margin-top:12px">🔁 Play this mission again</button>
-</section>
+<section id="home" class="center"><div class="hero"><div class="hero-art">🦊🔎🎮</div><h1>Sound Detectives:<br><span style="color:#7044dd">Phonics Arcade!</span></h1><p class="muted">Six worlds, six different game mechanics. Jump, sort, listen, build, remember and battle! No phonetic symbols — just English words, letters, spelling patterns and sounds.</p><button id="playBtn" class="primary">🚀 PLAY GAME</button></div></section>
+<section id="map" class="hide"><div class="stats"><span class="stat">⭐ Stars: <b id="totalStars">0</b></span><button id="homeBtn" class="secondary">🏠 Home</button></div><h2>🗺️ Choose a world</h2><p class="muted">Complete each world to earn its badge.</p><div class="grid" id="worldGrid"></div></section>
+<section id="game" class="hide" aria-live="polite"><div class="stats"><span class="stat" id="worldLabel"></span><span class="stat" id="missionLabel"></span><span class="stat">⭐ <b id="score">0</b></span><span class="stat" id="lives">❤️❤️❤️</span></div><div class="bar"><div id="progress"></div></div><div class="stage center"><div id="stageArt" class="art"></div><div id="prompt" class="prompt"></div><div id="target" class="target"></div><div id="helper" class="helper"></div><div id="activity"></div><div id="feedback" class="feedback">Ready, detective?</div><div class="actions"><button id="quit" class="secondary">🗺️ World map</button><button id="next" class="primary hide">Next ➜</button></div></div><div class="foot">Sound Detective Academy · Listen, look, think, play!</div></section>
+<section id="result" class="center hide"><div class="hero-art" id="resultArt">🏆</div><h1 id="resultTitle">World cleared!</h1><p class="muted" id="resultText"></p><div id="resultBadges"></div><button id="backMap" class="primary">🗺️ Back to worlds</button></section>
 </main></div>
 <script>
-(function(){
-const bank={
- c:{title:"Mission 1: C sounds",prompt:"What sound does the letter C make?",items:[
-  ["cat","🐱","k","/k/","/s/","C makes /k/ in cat."],["city","🏙️","s","/k/","/s/","C makes /s/ before I in city."],["cake","🎂","k","/k/","/s/","C makes /k/ in cake."],["cent","🪙","s","/k/","/s/","C makes /s/ before E in cent."],["circle","⭕","s","/k/","/s/","The first C in circle makes /s/."]
- ]},
- g:{title:"Mission 2: G sounds",prompt:"What sound does the letter G make?",items:[
-  ["goat","🐐","g","/g/","/dʒ/","G makes /g/ in goat."],["giant","🦣","j","/g/","/dʒ/","G often makes /dʒ/ before I, as in giant."],["game","🎮","g","/g/","/dʒ/","G makes /g/ in game."],["giraffe","🦒","j","/g/","/dʒ/","G makes /dʒ/ in giraffe."],["gift","🎁","g","/g/","/dʒ/","G makes /g/ in gift."]
- ]},
- s:{title:"Mission 3: S sounds",prompt:"Does S sound like /s/ or /z/?",items:[
-  ["sun","☀️","s","/s/","/z/","S sounds like /s/ in sun."],["zoo","🦓","z","/s/","/z/","The first sound in zoo is /z/. Listen to the word."],["sock","🧦","s","/s/","/z/","S sounds like /s/ in sock."],["music","🎵","z","/s/","/z/","The S in music is often pronounced /z/."],["snake","🐍","s","/s/","/z/","S sounds like /s/ in snake."]
- ]},
- a:{title:"Mission 4: Short A",prompt:"Can you hear the short A sound /æ/?",items:[
-  ["apple","🍎","yes","Yes, /æ/","No","Apple has the short A sound /æ/."],["cake","🎂","no","Yes, /æ/","No","Cake has a long A sound, /eɪ/."],["map","🗺️","yes","Yes, /æ/","No","Map has the short A sound /æ/."],["name","🏷️","no","Yes, /æ/","No","Name has a long A sound, /eɪ/."],["cat","🐱","yes","Yes, /æ/","No","Cat has the short A sound /æ/."]
- ]},
- v:{title:"Mission 5: V or W?",prompt:"What is the first sound?",items:[
-  ["van","🚐","v","/v/","/w/","Van begins with /v/."],["water","💧","w","/v/","/w/","Water begins with /w/."],["vest","🦺","v","/v/","/w/","Vest begins with /v/."],["window","🪟","w","/v/","/w/","Window begins with /w/."],["violin","🎻","v","/v/","/w/","Violin begins with /v/."]
- ]},
- mix:{title:"Mission 6: Super Mix",prompt:"Choose the correct sound!",items:[
-  ["city","🏙️","s","/k/","/s/","City begins with the /s/ sound."],["goat","🐐","g","/g/","/dʒ/","Goat begins with /g/."],["sun","☀️","s","/s/","/z/","Sun begins with /s/."],["apple","🍎","yes","Yes, /æ/","No","Apple has the short A sound /æ/."],["van","🚐","v","/v/","/w/","Van begins with /v/."]
- ]}
-};
-const orderKeys=["c","g","s","a","v","mix"];
-let currentKey="c",questions=[],idx=0,stars=0,totalStars=0,answered=false,lastKey="c",audioCtx=null;
+const worlds=[
+{id:'forest',name:'1. Forest Run',icon:'🌳🦊',cls:'forest',mechanic:'PLATFORM JUMP',desc:'Jump onto the safe word platforms.',art:'🌳🦊🪙',missions:[
+{type:'platform',prompt:'Jump only on words where C sounds like it does in CAT.',target:'Find 3 safe platforms',items:[['🐱','CAT',1],['🎂','CAKE',1],['🏙️','CITY',0],['🥣','CUP',1]],explain:'CAT, CAKE and CUP have the hard C sound. CITY begins with the soft C sound.'},
+{type:'platform',prompt:'The bridge is safe only for words that start like SUN.',target:'Find 3 safe platforms',items:[['☀️','SUN',1],['🐍','SNAKE',1],['🧦','SOCK',1],['🦓','ZOO',0]],explain:'SUN, SNAKE and SOCK begin with S. ZOO begins with Z.'},
+{type:'platform',prompt:'Choose the words where C sounds like the first sound in CITY.',target:'Find 2 safe platforms',items:[['🏙️','CITY',1],['🧊','CIRCLE',1],['🐱','CAT',0],['🎂','CAKE',0]],explain:'CITY and CIRCLE begin with the soft C sound.'},
+{type:'platform',prompt:'Jump onto every word that rhymes with CAT.',target:'Find 2 safe platforms',items:[['🧢','HAT',1],['🦇','BAT',1],['🪑','CHAIR',0],['🐕','DOG',0]],explain:'HAT and BAT rhyme with CAT.'},
+{type:'platform',prompt:'Final run: find the word that completes C _ T.',target:'C _ T',items:[['🐱','CAT',1],['🏙️','CITY',0],['🎂','CAKE',0],['🥣','CUP',0]],explain:'C-A-T spells CAT.'}]},
+{id:'aliens',name:'2. Alien Sorter',icon:'👾🛸',cls:'aliens',mechanic:'SORTING',desc:'Sort word cards into matching sound baskets.',art:'👾🛸💎',missions:[
+{type:'sort',prompt:'Sort words that begin with the same sound as GOAT.',target:'GOAT',items:[['🐐','GOAT',1],['🍇','GRAPES',1],['🦒','GIANT',0],['🎁','GIFT',1]],explain:'GOAT, GRAPES and GIFT begin with the hard G sound. GIANT begins with the soft G sound.'},
+{type:'sort',prompt:'Sort words that begin with the same sound as GIANT.',target:'GIANT',items:[['🦒','GIANT',1],['🦓','GIRAFFE',1],['🐐','GOAT',0],['🍇','GRAPES',0]],explain:'GIANT and GIRAFFE begin with the soft G sound.'},
+{type:'sort',prompt:'Sort words that begin with the same sound as VAN.',target:'VAN',items:[['🚐','VAN',1],['🩺','VET',1],['🌊','WAVE',0],['🐺','WOLF',0]],explain:'VAN and VET begin with V. WAVE and WOLF begin with W.'},
+{type:'sort',prompt:'Sort words that share the middle vowel sound in CAT.',target:'CAT',items:[['🗺️','MAP',1],['🧢','CAP',1],['🚌','BUS',0],['🌙','MOON',0]],explain:'CAT, MAP and CAP share the short A vowel sound.'},
+{type:'sort',prompt:'Final sort: words that begin with the same sound as SHIP.',target:'SHIP',items:[['👟','SHOE',1],['🐑','SHEEP',1],['☀️','SUN',0],['🐍','SNAKE',0]],explain:'SHOE and SHEEP begin with the SH sound; SUN and SNAKE begin with S.'}]},
+{id:'lab',name:'3. Sound Lab',icon:'🔬🎧',cls:'lab',mechanic:'LISTEN & IDENTIFY',desc:'Listen to a spoken word and find its picture.',art:'🔬🎧🧪',missions:[
+{type:'listen',prompt:'Listen to the secret word, then tap the matching picture.',target:'🔊 SECRET WORD',say:'snake',items:[['🐍','SNAKE','snake'],['☀️','SUN','sun'],['🧦','SOCK','sock']],answer:'snake',explain:'The word was SNAKE. It begins with S.'},
+{type:'listen',prompt:'What word did the robot say?',target:'🔊 LISTEN',say:'giant',items:[['🍇','GRAPES','grapes'],['🦒','GIANT','giant'],['🐐','GOAT','goat']],answer:'giant',explain:'The word was GIANT. Its G sound is different from GOAT.'},
+{type:'listen',prompt:'Listen carefully. Which word did you hear?',target:'🔊 LISTEN',say:'wave',items:[['🚐','VAN','van'],['🌊','WAVE','wave'],['🩺','VET','vet']],answer:'wave',explain:'The word was WAVE. It begins with W.'},
+{type:'listen',prompt:'Which word is hidden in the recording?',target:'🔊 LISTEN',say:'circle',items:[['🎂','CAKE','cake'],['🧊','CIRCLE','circle'],['🐱','CAT','cat']],answer:'circle',explain:'The word was CIRCLE. Its C has the soft sound, like CITY.'},
+{type:'listen',prompt:'Last sound mystery. Choose the word you hear.',target:'🔊 LISTEN',say:'map',items:[['🗺️','MAP','map'],['🌙','MOON','moon'],['🧢','CAP','cap']],answer:'map',explain:'The word was MAP. It has the short A vowel sound.'}]},
+{id:'builder',name:'4. Word Builder',icon:'🧱🔤',cls:'builder',mechanic:'BUILD SPELLINGS · 3 CHALLENGE LEVELS',desc:'Build words from picture clues, listening clues and trickier letter tiles.',art:'🧱🔤✨',missions:[
+{type:'build',level:'LEVEL 1 · PICTURE CLUE',prompt:'Look at the picture. Tap the letter tiles in order to spell the word.',target:'',hint:'🐱',answer:'CAT',tiles:['T','C','A'],explain:'The picture is a CAT. C-A-T spells CAT.'},
+{type:'build',level:'LEVEL 2 · LISTENING CLUE',prompt:'Listen to the word. There is no written word to copy — build it from what you hear.',target:'',say:'goat',answer:'GOAT',tiles:['O','G','A','T'],explain:'You heard GOAT. G-O-A-T spells GOAT.'},
+{type:'build',level:'LEVEL 3 · EXTRA LETTERS',prompt:'Use the picture clue, but watch out: some tiles do not belong in the word.',target:'',hint:'🏙️',answer:'CITY',tiles:['T','C','Y','I','A','S'],explain:'The picture is a CITY. C-I-T-Y spells CITY; A and S are distractors.'},
+{type:'build',level:'LEVEL 2 · LISTENING CLUE',prompt:'Listen carefully, then build the word without seeing it written.',target:'',say:'wave',answer:'WAVE',tiles:['V','W','A','E'],explain:'You heard WAVE. W-A-V-E spells WAVE.'},
+{type:'build',level:'LEVEL 3 · FINAL CHALLENGE',prompt:'Final build! Use the picture and choose the right letters among the extra tiles.',target:'',hint:'🗺️',answer:'MAP',tiles:['A','M','O','P','T'],explain:'The picture is a MAP. M-A-P spells MAP; O and T are distractors.'}]},
+{id:'memory',name:'5. Memory Maze',icon:'🧠🃏',cls:'memory',mechanic:'PICTURE-WORD MEMORY',desc:'Flip cards and match each picture to its word.',art:'🧠🃏🌈',missions:[
+{type:'memory',prompt:'Flip two cards at a time. Match each picture with its word.',target:'Find all 3 pairs',pairs:[['🐱','CAT'],['🎂','CAKE'],['🏙️','CITY']],explain:'You matched each picture to its written word.'},
+{type:'memory',prompt:'New memory board! Find all picture-word pairs.',target:'Find all 3 pairs',pairs:[['🐐','GOAT'],['🍇','GRAPES'],['🦒','GIANT']],explain:'Look closely at each word as you match it.'},
+{type:'memory',prompt:'Sound memory: match each picture to its word.',target:'Find all 3 pairs',pairs:[['☀️','SUN'],['🐍','SNAKE'],['🦓','ZOO']],explain:'SUN and SNAKE begin with S; ZOO begins with Z.'},
+{type:'memory',prompt:'Race memory! Find all the matching pairs.',target:'Find all 3 pairs',pairs:[['🚐','VAN'],['🌊','WAVE'],['🩺','VET']],explain:'VAN and VET begin with V; WAVE begins with W.'},
+{type:'memory',prompt:'Final board: match every picture to its word.',target:'Find all 3 pairs',pairs:[['🗺️','MAP'],['🧢','CAP'],['🚌','BUS']],explain:'Read the word cards carefully to find each pair.'}]},
+{id:'boss',name:'6. Final Boss',icon:'🐲⚡',cls:'boss',mechanic:'MIXED BOSS BATTLE',desc:'Defeat the dragon with a mix of phonics challenges.',art:'🐲🏰⚡',missions:[
+{type:'choice',prompt:'Boss shield 1: choose the word where C sounds like it does in CAT.',target:'HARD C',items:[['🎂','CAKE',1],['🏙️','CITY',0],['🧊','CIRCLE',0]],explain:'CAKE begins with the hard C sound.'},
+{type:'choice',prompt:'Boss shield 2: which word begins like GIANT?',target:'SOFT G',items:[['🦒','GIRAFFE',1],['🐐','GOAT',0],['🍇','GRAPES',0]],explain:'GIRAFFE and GIANT begin with the soft G sound.'},
+{type:'choice',prompt:'Boss shield 3: which word rhymes with MAP?',target:'MAP',items:[['🧢','CAP',1],['🚌','BUS',0],['🌙','MOON',0]],explain:'MAP and CAP rhyme.'},
+{type:'listen',prompt:'Boss shield 4: listen and choose the word you hear.',target:'🔊 LISTEN',say:'zebra',items:[['🦓','ZEBRA','zebra'],['🐍','SNAKE','snake'],['☀️','SUN','sun']],answer:'zebra',explain:'The word was ZEBRA. It begins with Z.'},
+{type:'choice',prompt:'Final hit! Which letter completes the word CAT?',target:'_ A T',items:[['C','C',1],['S','S',0],['K','K',0]],explain:'C-A-T spells CAT.'}]}
+];
+let active=null,mission=0,score=0,totalStars=0,hearts=3,done=new Set(),answered=false,sortIndex=0,sortItems=[],sortHits=0,buildLetters=[],memoryFirst=null,memoryMatched=[];
 const $=id=>document.getElementById(id);
-function show(id){["home","levels","game","finish"].forEach(s=>$(s).classList.toggle("hidden",s!==id))}
-function shuffle(a){return a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1])}
-function beep(kind){
- try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==="suspended")audioCtx.resume();
- const now=audioCtx.currentTime;const notes=kind==="good"?[523,659,784]:kind==="bad"?[220,180]:[440,660];
- notes.forEach((f,i)=>{const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=kind==="bad"?"triangle":"sine";o.frequency.value=f;g.gain.setValueAtTime(.0001,now+i*.11);g.gain.exponentialRampToValueAtTime(.12,now+i*.11+.02);g.gain.exponentialRampToValueAtTime(.0001,now+i*.11+.18);o.connect(g);g.connect(audioCtx.destination);o.start(now+i*.11);o.stop(now+i*.11+.2)});
- }catch(e){}
-}
-function speak(word){if(!("speechSynthesis"in window)){sayFeedback("🔊","Your browser does not support spoken audio. Try another browser.","");return}
- window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(word);u.lang="en-GB";u.rate=.78;u.pitch=1.12;window.speechSynthesis.speak(u)}
-function start(key){currentKey=key;lastKey=key;questions=shuffle(bank[key].items.slice());idx=0;stars=0;show("game");$("levelLabel").textContent=bank[key].title;render()}
-function render(){answered=false;const q=questions[idx];$("qCount").textContent=`Question ${idx+1}/5`;$("sessionStars").textContent=stars;$("progressbar").style.width=(idx/5*100)+"%";$("emoji").textContent=q[1];$("word").textContent=q[0];$("prompt").textContent=bank[currentKey].prompt;
- $("feedback").className="feedback";$("feedback").innerHTML='<span class="face">💡</span><span>Listen, look and choose an answer!</span>';$("next").classList.add("hidden");
- let labels,correct;
- if(currentKey==="c"){labels=["/k/","/s/"];correct=q[2]==="k"?0:1}
- else if(currentKey==="g"){labels=["/g/","/dʒ/"];correct=q[2]==="g"?0:1}
- else if(currentKey==="s"){labels=["/s/","/z/"];correct=q[2]==="s"?0:1}
- else if(currentKey==="a"){labels=["Yes, /æ/","No"];correct=q[2]==="yes"?0:1}
- else if(currentKey==="v"){labels=["/v/","/w/"];correct=q[2]==="v"?0:1}
- else { // mixed answers are selected according to the item type
-   if(q[0]==="city"){labels=["/k/","/s/"];correct=1}
-   else if(q[0]==="goat"){labels=["/g/","/dʒ/"];correct=0}
-   else if(q[0]==="sun"){labels=["/s/","/z/"];correct=0}
-   else if(q[0]==="apple"){labels=["Yes, /æ/","No"];correct=0}
-   else {labels=["/v/","/w/"];correct=0}
- }
- $("answers").innerHTML="";
- labels.forEach((label,i)=>{const b=document.createElement("button");b.className="answer "+(i===0?"a":"b");b.innerHTML=`<span class="symbol">${i===0?"🟢":"🔵"}</span>${label}`;b.addEventListener("click",()=>answer(i===correct,q));$("answers").appendChild(b)});
-}
-function sayFeedback(face,msg,kind){$("feedback").className="feedback "+kind;$("feedback").innerHTML=`<span class="face">${face}</span><span>${msg}</span>`}
-function answer(iCorrect,q){if(answered)return;answered=true;document.querySelectorAll(".answer").forEach(b=>b.disabled=true);
- if(iCorrect){stars++;totalStars++;$("sessionStars").textContent=stars;$("totalStars").textContent=totalStars;beep("good");sayFeedback("🌟","Brilliant! "+q[5],"good")}
- else{beep("bad");sayFeedback("💛","Good try! "+q[5],"bad")}
- $("next").textContent=idx===4?"See my stars! 🏆":"Next question ➜";$("next").classList.remove("hidden")}
-function next(){if(idx<4){idx++;render()}else finish()}
-function finish(){show("finish");$("progressbar").style.width="100%";$("finishStars").textContent=`${stars} / 5 ⭐`;
- $("finishTitle").textContent=stars===5?"PHONICS SUPERSTAR!":stars>=3?"Great detective work!":"Keep going, little detective!";
- $("finishText").textContent=stars===5?"Perfect mission! You listened carefully and cracked the sound code.":stars>=3?"You are learning lots of English sounds. Practise again and collect more stars!":"Every expert practises. Listen to the words and try this mission again!";
- $("earned").innerHTML=stars>=4?'<span class="badge">🏅 Sound Expert</span>':stars>=2?'<span class="badge">🔎 Sound Explorer</span>':'<span class="badge">🌱 Super Learner</span>';beep(stars>=3?"good":"neutral")}
-$("goLevels").addEventListener("click",()=>show("levels"));$("backHome").addEventListener("click",()=>show("home"));document.querySelectorAll("[data-level]").forEach(b=>b.addEventListener("click",()=>start(b.dataset.level)));
-$("hearWord").addEventListener("click",()=>{const q=questions[idx];speak(q[0]);beep("neutral")});$("next").addEventListener("click",next);$("quit").addEventListener("click",()=>show("levels"));$("moreMissions").addEventListener("click",()=>show("levels"));$("replay").addEventListener("click",()=>start(lastKey));
-})();
+function screen(id){['home','map','game','result'].forEach(x=>$(x).classList.toggle('hide',x!==id))}
+function say(word){if(!window.speechSynthesis){feedback(false,'Audio playback is not supported in this browser.');return}window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(word);u.lang='en-GB';u.rate=.78;window.speechSynthesis.speak(u)}
+function button(text,cls,fn){const b=document.createElement('button');b.textContent=text;b.className=cls;b.onclick=fn;return b}
+function drawMap(){$('worldGrid').innerHTML='';worlds.forEach(w=>{const b=button('',`world ${w.cls}`,()=>startWorld(w.id));b.innerHTML=`<span class="icon">${w.icon} ${done.has(w.id)?'🏅':'✨'}</span><strong>${w.name}</strong><small>${w.desc}</small><small>🎮 ${w.mechanic}</small><small>${done.has(w.id)?'✅ Badge earned':'🎯 5 missions'}</small>`;$('worldGrid').appendChild(b)});$('totalStars').textContent=totalStars}
+function startWorld(id){active=worlds.find(w=>w.id===id);mission=0;score=0;hearts=3;screen('game');renderMission()}
+function feedback(ok,msg){$('feedback').className='feedback '+(ok?'good':'bad');$('feedback').textContent=(ok?'⭐ NICE WORK! ':'💡 NOT QUITE. ')+msg}
+function updateStats(){$('worldLabel').textContent=active.name;$('missionLabel').textContent=`Mission ${mission+1}/5`;$('score').textContent=score;$('lives').textContent='❤️'.repeat(hearts)+'🖤'.repeat(3-hearts);$('progress').style.width=(mission/5*100)+'%'}
+function finishMission(ok,q){if(answered)return;answered=true;if(ok){score++;totalStars++;feedback(true,q.explain)}else{hearts=Math.max(0,hearts-1);feedback(false,q.explain)}$('score').textContent=score;$('lives').textContent='❤️'.repeat(hearts)+'🖤'.repeat(3-hearts);$('next').textContent=mission===4?'🏆 Finish world':'Next mission ➜';$('next').classList.remove('hide')}
+function renderMission(){answered=false;sortIndex=0;sortHits=0;buildLetters=[];memoryFirst=null;memoryMatched=[];const q=active.missions[mission];updateStats();$('stageArt').textContent=active.art;$('prompt').textContent=q.prompt;$('target').textContent=q.target||'';$('helper').textContent=(q.level?q.level+' · ':'')+active.mechanic;$('feedback').className='feedback';$('feedback').textContent='Ready, detective?';$('next').classList.add('hide');$('activity').innerHTML='';if(q.type==='platform')platformGame(q);else if(q.type==='sort')sortGame(q);else if(q.type==='listen')listenGame(q);else if(q.type==='build')buildGame(q);else if(q.type==='memory')memoryGame(q);else choiceGame(q)}
+function pictureButton(em,w,cls='option'){const b=button('',cls,()=>{});b.innerHTML=`<span class="emoji">${em}</span><span class="word">${w}</span>`;return b}
+function platformGame(q){const area=$('activity'),wrap=document.createElement('div');wrap.className='options';let selected=0;const needed=q.items.filter(x=>x[2]).length;const count=document.createElement('p');count.className='muted';count.textContent=`Safe platforms: 0 / ${needed}`;area.appendChild(count);q.items.forEach(([em,w,ok])=>{const b=pictureButton(em,w,'option platform');b.onclick=()=>{if(answered||b.disabled)return;b.disabled=true;if(ok){b.classList.add('correct');selected++;count.textContent=`Safe platforms: ${selected} / ${needed}`;if(selected===needed)finishMission(true,q)}else{b.classList.add('wrong');hearts=Math.max(0,hearts-1);$('lives').textContent='❤️'.repeat(hearts)+'🖤'.repeat(3-hearts);feedback(false,`That platform is unsafe. ${q.explain}`);if(needed-selected>q.items.filter(x=>!x[2]&& !wrap.querySelector(`button[data-word="${x[1]}"]`)).length){/* no-op */}}};b.dataset.word=w;wrap.appendChild(b)});area.appendChild(wrap);$('helper').textContent='Tap every safe platform. Avoid the others.'}
+function sortGame(q){const area=$('activity'),bins=document.createElement('div');bins.className='baskets';const match=button('👽 MATCHES','basket',()=>sortAnswer(true));match.innerHTML='<span class="emoji">👽</span><strong>MATCHES</strong><small>Same sound/pattern</small>';const other=button('🗑️ NOT A MATCH','basket',()=>sortAnswer(false));other.innerHTML='<span class="emoji">🗑️</span><strong>NOT A MATCH</strong><small>Different sound</small>';bins.append(match,other);area.appendChild(bins);const cards=document.createElement('div');cards.className='cards';sortItems=[...q.items].sort(()=>Math.random()-.5);let selected=null;let idx=0;function next(){selected=null;cards.innerHTML='';if(idx>=sortItems.length){finishMission(true,q);return}const [em,w]=sortItems[idx];const c=pictureButton(em,w,'option');c.onclick=()=>{if(answered)return;selected=c;c.classList.add('selected')};cards.appendChild(c);$('helper').textContent=`Card ${idx+1} of ${sortItems.length}: choose a card, then its basket.`}function sortAnswer(isMatch){if(answered||!selected)return;const item=sortItems[idx];const correct=!!item[2]===isMatch;if(correct){idx++;if(idx===sortItems.length)finishMission(true,q);else next()}else{finishMission(false,q)}}match.onclick=()=>sortAnswer(true);other.onclick=()=>sortAnswer(false);area.appendChild(cards);next()}
+function listenGame(q){const area=$('activity');area.appendChild(button('🔊 Play word','primary',()=>say(q.say)));const wrap=document.createElement('div');wrap.className='options';q.items.forEach(([em,w,val])=>{const b=pictureButton(em,w);b.onclick=()=>{if(answered)return;finishMission(val===q.answer,q);[...wrap.children].forEach(x=>x.disabled=true)};wrap.appendChild(b)});area.appendChild(wrap);$('helper').textContent='Press the speaker, listen, then choose the picture.'}
+function choiceGame(q){const area=$('activity'),wrap=document.createElement('div');wrap.className='options';q.items.forEach(([em,w,ok])=>{const b=pictureButton(em,w);b.onclick=()=>{if(answered)return;finishMission(!!ok,q);[...wrap.children].forEach(x=>x.disabled=true)};wrap.appendChild(b)});area.appendChild(wrap)}
+function buildGame(q){const area=$('activity');if(q.hint){const hint=document.createElement('div');hint.className='art';hint.style.fontSize='4rem';hint.style.margin='10px';hint.textContent=q.hint;area.appendChild(hint)}if(q.say){area.appendChild(button('🔊 Listen to the word','primary',()=>say(q.say)));}const out=document.createElement('div');out.className='output';out.textContent='_ '.repeat(q.answer.length);out.setAttribute('aria-label',`${q.answer.length} letter spaces`);area.appendChild(out);const tiles=document.createElement('div');tiles.className='tiles';let chosen=[];q.tiles.forEach(letter=>{const b=button(letter,'letter',()=>{if(answered||b.classList.contains('used'))return;chosen.push({letter,b});b.classList.add('used');out.textContent=chosen.map(x=>x.letter).join(' ')+(chosen.length<q.answer.length?' _ '.repeat(q.answer.length-chosen.length):'');if(chosen.length===q.answer.length){const ok=chosen.map(x=>x.letter).join('')===q.answer;if(ok)finishMission(true,q);else{feedback(false,'Not quite — clear the tiles and try again.');chosen.forEach(x=>x.b.classList.remove('used'));chosen=[];out.textContent='_ '.repeat(q.answer.length)}}});tiles.appendChild(b)});area.appendChild(tiles);area.appendChild(button('↩ Clear letters','secondary',()=>{if(answered)return;chosen.forEach(x=>x.b.classList.remove('used'));chosen=[];out.textContent='_ '.repeat(q.answer.length)}));$('helper').textContent=q.say?'Listen as many times as you need, then build the word.':'Use the picture clue and the letter tiles. No complete word is shown.'}
+function memoryGame(q){const area=$('activity'),wrap=document.createElement('div');wrap.className='cards';let deck=[];q.pairs.forEach((p,i)=>{deck.push({id:i,kind:'pic',face:p[0]},{id:i,kind:'word',face:p[1]})});deck.sort(()=>Math.random()-.5);deck.forEach((item,index)=>{const b=button('❔','card',()=>{if(answered||memoryMatched.includes(index)||b.classList.contains('open'))return;b.textContent=item.face;b.classList.add('open');if(!memoryFirst){memoryFirst={index,item,b};return}const first=memoryFirst;memoryFirst=null;if(first.item.id===item.id&&first.item.kind!==item.kind){memoryMatched.push(index,first.index);b.classList.remove('open');b.classList.add('paired');first.b.classList.remove('open');first.b.classList.add('paired');if(memoryMatched.length===deck.length)finishMission(true,q)}else{setTimeout(()=>{if(!answered){b.textContent='❔';first.b.textContent='❔';b.classList.remove('open');first.b.classList.remove('open')}},700)}});wrap.appendChild(b)});area.appendChild(wrap);$('helper').textContent='Flip two cards. Match the picture to its written word.'}
+function endWorld(){done.add(active.id);$('progress').style.width='100%';$('resultArt').textContent=score>=4?'🏆🌟🎉':'🎮⭐💪';$('resultTitle').textContent=score>=4?'WORLD CLEARED!':'WORLD COMPLETE!';$('resultText').textContent=`You earned ${score} out of 5 stars in ${active.name}. ${score>=4?'Brilliant detective work!':'Play again to practise and earn more stars.'}`;$('resultBadges').innerHTML=`<span class="badge">⭐ ${score}/5 stars</span><span class="badge">🏅 ${done.size}/6 worlds</span>`;screen('result')}
+$('playBtn').onclick=()=>{screen('map');drawMap()};$('homeBtn').onclick=()=>screen('home');$('quit').onclick=()=>{screen('map');drawMap()};$('backMap').onclick=()=>{screen('map');drawMap()};$('next').onclick=()=>{if(mission<4){mission++;renderMission()}else endWorld()};
 </script></body></html>
